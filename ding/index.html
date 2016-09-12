@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>20周年</title>
+    
+    <script type="text/javascript"
+            src="js/jquery-1.12.4.js">
+    </script>
+</head>
+<body style="background-color: rgba(255,230,0,1);">
+    <div class="page" id="page7">
+        <div class="happyBirthday"><b>顶点20周岁生日快乐！</b></div>
+        <div class="line"></div>
+        <img src="images/20yea1r.png" alt="20yea1r" class="yea1r">
+    </div>
+    <div class="page" id="page6">
+        <h3>二十周年庆典</h3>
+        <img src="images/reweima.jpg" alt="reweima" class="reweima">
+        <img src="images/yellow5.png" alt="yellow5" class="yellow5">
+        <div class="aTime">
+            时间：
+        </div>
+            <p class="aTime1">7月30日 13:30-16:30</p>
+        <div class="aAddress">
+            地点：
+        </div>
+            <p class="aAddress1">福州悦华酒店华庭厅</p>
+            <p class="aAddress2">（鼓楼区华林路11号）</p>
+    </div>
+    <div class="page" id="page5">
+        <div class="title"><span>PARTY节目</span></div>
+        <ul class="showList">
+            <li><span>◇ 沙画：《顶点之路》</span></li>
+            <li><span>◇ 舞蹈：《鼓舞未来》</span></li>
+            <li><span>◇ 诗朗诵与舞蹈：《感恩的心》</span></li>
+            <li><span>◇ 小品：《程序员相亲》</span></li>
+            <li><span>◇ 小品：《扶老人》</span></li>
+            <li><span>◇ 情景剧：《顶点修炼手册》</span></li>
+            <li><span>◇ 舞蹈：《印度舞》</span></li>
+            <li><span>◇ 舞蹈：《顶点萌宝》</span></li>
+            <li><span>◇ 曲艺：《三句半》</span></li>
+            <li><span>◇ 歌曲：《热曲串烧》</span></li>
+            <li><span>◇ 激光舞：《未来》</span></li>
+        </ul>
+    </div>
+    <div class="page" id="page4">
+        <img src="images/together.png" alt="together" class="together">
+        <img src="images/yellow4.png" alt="yellow4" class="yellow4">
+    </div>
+    <div class="page" id="page3">
+        <img src="images/free.png" alt="free" class="free">
+        <img src="images/yellow3.png" alt="yellow3" class="yellow3">
+    </div>
+    <div class="page" id="page2">
+        <img src="images/happy.png" alt="happy" class="happy">
+        <img src="images/big.png" alt="big" class="big">
+        <img src="images/yellow2.png" alt="yellow2" class="yellow2">
+    </div>
+    <div class="page" id="page1">
+        <img src="images/party.png" alt="party" class="party">
+        <img src="images/date.png" alt="date" class="date">
+        <img src="images/party02.png" alt="party02" class="party02">
+        <img src="images/yellow01.png" alt="yellow01" class="yellow01">
+    </div>
+    <img src="images/info.png" alt="info" class="info">
+    <script type="text/javascript">
+        window.onload = function(){
+            function resetPage(){
+                var ww=document.documentElement.clientWidth;
+                var scale=ww/640;//psd设计图宽度
+                document.body.style.zoom=scale;
+                console.log(scale);
+            }
+            resetPage();
+            window.onresize=function (){
+                resetPage();
+            }
+            setTimeout(function(){
+                $('.page').css("display",'block');
+            },700);
+
+            var startY=endY=startY2=endY2=0;curIndex=1;
+            document.addEventListener('touchstart',touchstart,false);
+            document.addEventListener('touchmove',touchmove,false);
+            document.addEventListener('touchend',touchend,false);
+            function touchstart(e){
+                event.preventDefault();
+                if(e.touches) {
+                    startY = e.touches[0].pageY;
+                }
+                console.log('Y1:'+startY);
+            }
+            function touchmove(e){
+                event.preventDefault();
+                if(e.touches) {
+                    endY = e.touches[0].pageY;
+                }
+                console.log('Y2:'+endY);
+            }
+            function touchend() {
+                event.preventDefault();
+                console.log('Y1:' + startY + 'Y2:' + endY);
+                if ((startY != 0 && endY != 0) && (endY != endY2) && (startY - endY > 55)) {
+                    if (curIndex == 7) return;
+                    console.log('向上');
+                    var _n = '#page' + curIndex;
+                    $(_n).slideUp(500, function () {
+                        animate(curIndex);
+                    });
+                    curIndex++;
+                } else if ((startY != 0 && endY != 0) && (endY != endY2) && (endY - startY > 55)) {
+                    console.log('向下');
+                    if (curIndex == 1) return;
+                    curIndex--;
+                    var _n = '#page' + curIndex;
+                    $(_n).slideDown(500, function () {
+                        animate(curIndex);
+                    });
+                }
+                startY2 = startY;
+                endY2 = endY;
+            }
+
+            //动画函数
+            function animate(i) {
+                var _n = '#page' + i;
+                $('img').css({
+                    'animation': ''
+                });
+                $('.info').css({
+                    'display': 'block'
+                });
+                switch (i) {
+                    case 1:
+                        $('.party').css({
+                            'animation': '1.5s page1_party linear forwards'
+                        });
+                        $('.date').css({
+                            'animation': '1.5s page1_date  linear infinite'
+                        });
+                        $('.party02').css({
+                            'animation': '1.5s page1_date  linear infinite'
+                        });
+                        $('.yellow01').css({
+                            'animation': '1.5s page1_yellow01 1s linear forwards,0.75s page1_yellow01_02 2s linear infinite'
+                        });
+                        break;
+                    case 2:
+                        $('.happy').css({
+                            'animation': '1s page1_party linear forwards'
+                        });
+                        $('.big').css({
+                            'animation': '1s page2_big  linear infinite'
+                        });
+                        $('.yellow2').css({
+                            'animation': '1s page2_yellow2  linear infinite'
+                        });
+                        break;
+                    case 3:
+
+                        $('.free').css({
+                            'animation': '0.6s page2_free1 linear forwards,1.5s page2_free2 0.6s linear infinite'
+                        });
+                        $('.yellow3').css({
+                            'animation': '0.6s page2_free1 linear forwards,1.5s page2_free2 0.6s linear infinite'
+                        });
+                        break;
+                    case 4:
+                        $('.together').css({
+                            'animation': '1s page4_together linear infinite'
+                        });
+                        $('.yellow4').css({
+                            'animation': '0.8s page4_together_01  linear forwards,1.5s page4_together_02 0.8s linear infinite'
+                        });
+                        
+                        break;
+                    case 6:
+                        $('.yellow5').css({
+                            'animation': '1s page6_yellow5 linear infinite'
+                        });
+                        
+                        break;
+
+                    case 7:
+                        $('.info').css({
+                            'display': 'none'
+                        });
+                        break;
+                }
+            }
+            $(function(){
+                animate(curIndex);
+            })
+
+        }
+
+
+            
+            
+        
+        
+    </script>
+</body>
+</html>
